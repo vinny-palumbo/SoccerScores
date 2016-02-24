@@ -34,7 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="barqsoft.footballscores.MainActivity" />
         </activity>
-        <service android:name=".service.myFetchService" />
+        <service android:name=".service.FetchService" />
     </application>
 
 </manifest>
