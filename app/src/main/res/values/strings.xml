@@ -43,5 +43,7 @@
     <string name="accessibility_awayTeam_icon">Away team icon: <xliff:g id="team">%1$s</xliff:g></string>
     <string name="accessibility_score">Score: <xliff:g id="score">%1$s</xliff:g></string>
     <string name="accessibility_matchTime">Match Time: <xliff:g id="time">%1$s</xliff:g></string>
+    <!-- Empty Weather Database -->
+    <string name="empty_fixtures_list">No Fixtures</string>
     
 </resources>
