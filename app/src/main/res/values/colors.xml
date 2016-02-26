@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- the activated state color -->
+    <color name="activated">#E0E0E0</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="dark_gray">#2e2e2e</color>
+
     <color name="blue01">#0099CC</color>
     <color name="blue02">#079DD0</color>
     <color name="blue03">#0FA1D3</color>
