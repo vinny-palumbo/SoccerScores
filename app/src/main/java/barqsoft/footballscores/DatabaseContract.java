@@ -9,9 +9,10 @@ import android.provider.BaseColumns;
  */
 public class DatabaseContract
 {
-    public static final String SCORES_TABLE = "scores_table";
-    public static final class scores_table implements BaseColumns
+    public static final class ScoresEntry implements BaseColumns
     {
+        public static final String TABLE_NAME = "scores";
+
         //Table data
         public static final String LEAGUE_COL = "league";
         public static final String DATE_COL = "date";
@@ -23,8 +24,7 @@ public class DatabaseContract
         public static final String MATCH_ID = "match_id";
         public static final String MATCH_DAY = "match_day";
 
-        //public static Uri SCORES_CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH)
-                //.build();
+        public static Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH).build();
 
         //Types
         public static final String CONTENT_TYPE =
@@ -34,15 +34,15 @@ public class DatabaseContract
 
         public static Uri buildScoreWithLeague()
         {
-            return BASE_CONTENT_URI.buildUpon().appendPath("league").build();
+            return CONTENT_URI.buildUpon().appendPath("league").build();
         }
         public static Uri buildScoreWithId()
         {
-            return BASE_CONTENT_URI.buildUpon().appendPath("id").build();
+            return CONTENT_URI.buildUpon().appendPath("id").build();
         }
         public static Uri buildScoreWithDate()
         {
-            return BASE_CONTENT_URI.buildUpon().appendPath("date").build();
+            return CONTENT_URI.buildUpon().appendPath("date").build();
         }
     }
     //URI data
