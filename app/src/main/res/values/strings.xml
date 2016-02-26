@@ -45,5 +45,8 @@
     <string name="accessibility_matchTime">Match Time: <xliff:g id="time">%1$s</xliff:g></string>
     <!-- Empty Weather Database -->
     <string name="empty_fixtures_list">No Fixtures</string>
+
+    <!-- Strings related to Widgets -->
+    <string name="title_widget_today">Football Scores Today</string>
     
 </resources>
