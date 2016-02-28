@@ -22,7 +22,7 @@ import barqsoft.footballscores.Utilies;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DetailWidgetRemoteViewsService extends RemoteViewsService {
     public final String LOG_TAG = DetailWidgetRemoteViewsService.class.getSimpleName();
-    private static final String[] FORECAST_COLUMNS = {
+    private static final String[] SCORES_COLUMNS = {
             DatabaseContract.ScoresEntry.TABLE_NAME + "." + DatabaseContract.ScoresEntry._ID,
             DatabaseContract.ScoresEntry.TIME_COL,
             DatabaseContract.ScoresEntry.HOME_COL,
@@ -32,11 +32,11 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
     };
     // these indices must match the projection
     static final int INDEX_SCORES_ID = 0;
-    static final int INDEX_SCORES_TIME = 2;
-    static final int INDEX_SCORES_HOME_TEAM = 3;
-    static final int INDEX_SCORES_AWAY_TEAM = 4;
-    static final int INDEX_SCORES_HOME_GOALS = 6;
-    static final int INDEX_SCORES_AWAY_GOALS = 7;
+    static final int INDEX_SCORES_TIME = 1;
+    static final int INDEX_SCORES_HOME_TEAM = 2;
+    static final int INDEX_SCORES_AWAY_TEAM = 3;
+    static final int INDEX_SCORES_HOME_GOALS = 4;
+    static final int INDEX_SCORES_AWAY_GOALS = 5;
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -59,9 +59,9 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 // that calls use our process and permission
                 final long identityToken = Binder.clearCallingIdentity();
 //                String location = Utility.getPreferredLocation(DetailWidgetRemoteViewsService.this);
-                Uri scoresUri = DatabaseContract.ScoresEntry.buildScoreWithDate();
+                Uri scoresUri = DatabaseContract.ScoresEntry.CONTENT_URI;
                 data = getContentResolver().query(scoresUri,
-                        FORECAST_COLUMNS,
+                        SCORES_COLUMNS,
                         null,
                         null,
                         null);
