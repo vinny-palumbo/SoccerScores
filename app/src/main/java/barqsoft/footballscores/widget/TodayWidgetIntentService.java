@@ -37,6 +37,7 @@ import barqsoft.footballscores.Utilies;
  */
 public class TodayWidgetIntentService extends IntentService {
     private static final String[] SCORES_COLUMNS = {
+            DatabaseContract.ScoresEntry._ID,
             DatabaseContract.ScoresEntry.TIME_COL,
             DatabaseContract.ScoresEntry.HOME_COL,
             DatabaseContract.ScoresEntry.AWAY_COL,
@@ -44,11 +45,12 @@ public class TodayWidgetIntentService extends IntentService {
             DatabaseContract.ScoresEntry.AWAY_GOALS_COL
     };
     // these indices must match the projection
-    private static final int INDEX_SCORES_TIME  = 2;
-    private static final int INDEX_SCORES_HOME_TEAM  = 3;
-    private static final int INDEX_SCORES_AWAY_TEAM  = 4;
-    private static final int INDEX_SCORES_HOME_GOALS  = 6;
-    private static final int INDEX_SCORES_AWAY_GOALS  = 7;
+    private static final int INDEX_SCORES_ID  = 0;
+    private static final int INDEX_SCORES_TIME  = 1;
+    private static final int INDEX_SCORES_HOME_TEAM  = 2;
+    private static final int INDEX_SCORES_AWAY_TEAM  = 3;
+    private static final int INDEX_SCORES_HOME_GOALS  = 4;
+    private static final int INDEX_SCORES_AWAY_GOALS  = 5;
 
     public TodayWidgetIntentService() {
         super("TodayWidgetIntentService");
