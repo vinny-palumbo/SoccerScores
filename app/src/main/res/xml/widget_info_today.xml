@@ -17,6 +17,7 @@
     android:initialLayout="@layout/widget_today"
     android:minHeight="@dimen/widget_today_default_height"
     android:minWidth="@dimen/widget_today_default_width"
-    android:updatePeriodMillis="0" />
+    android:updatePeriodMillis="0"
+    android:previewImage="@drawable/widget_preview_today"/>
     <!--updatePeriodMillis: if you have another component already controlling the flow of new data into your app,
     such as Sunshine Sync Adapter, you can use 0 to disable this functionality and prevent unnecessary work-->
