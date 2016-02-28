@@ -43,6 +43,13 @@
     <string name="accessibility_awayTeam_icon">Away team icon: <xliff:g id="team">%1$s</xliff:g></string>
     <string name="accessibility_score">Score: <xliff:g id="score">%1$s</xliff:g></string>
     <string name="accessibility_matchTime">Match Time: <xliff:g id="time">%1$s</xliff:g></string>
+
+    <!-- Strings related to Widgets -->
+    <string name="title_widget_detail">Football Scores Details</string>
+
+    <!-- Widget: No Fixtures -->
+    <string name="empty_fixtures_today">No Fixtures Today</string>
+
     <!-- Empty Weather Database -->
     <string name="empty_fixtures_list">No Fixtures</string>
 
