@@ -5,7 +5,9 @@
     <color name="activated">#E0E0E0</color>
 
     <color name="white">#FFFFFF</color>
-    <color name="dark_gray">#2e2e2e</color>
+    <color name="list_item_text">#737373</color>
+    <color name="detail_widget_bar">#2e2e2e</color>
+
 
     <color name="blue01">#0099CC</color>
     <color name="blue02">#079DD0</color>

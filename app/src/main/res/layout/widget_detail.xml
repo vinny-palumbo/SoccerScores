@@ -24,7 +24,7 @@
         android:id="@+id/widget"
         android:layout_width="match_parent"
         android:layout_height="@dimen/abc_action_bar_default_height_material"
-        android:background="@color/dark_gray">
+        android:background="@color/detail_widget_bar">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,8 +44,14 @@
             android:id="@+id/widget_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginEnd="15sp"
+            android:layout_marginTop="8sp"
+            android:layout_marginBottom="8sp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="15sp"
             tools:listitem="@layout/widget_detail_list_item" />
         <TextView
             android:id="@+id/widget_empty"
