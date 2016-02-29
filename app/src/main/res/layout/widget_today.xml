@@ -29,13 +29,24 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        android:minHeight="?android:attr/listPreferredItemHeight">
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:elevation="4dp"
+        android:background="@drawable/list_item"
+        android:paddingLeft="4dp"
+        android:paddingStart="4dp"
+        android:paddingRight="4dp"
+        android:paddingEnd="4dp"
+        android:layout_marginLeft="8sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginRight="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="wrap_content"
@@ -51,13 +62,13 @@
                 android:textSize="@dimen/TeamNames"
                 android:gravity="center"
                 android:text="@string/test_text"
-                android:textColor="@color/dark_gray"
+                android:textColor="@color/list_item_text"
                 android:id="@+id/widget_home_name"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -67,14 +78,14 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="@dimen/Score"
-                android:textColor="@color/dark_gray"
+                android:textColor="@color/list_item_text"
                 android:id="@+id/widget_score_textview"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/test_text"
-                android:textColor="@color/dark_gray"
+                android:textColor="@color/list_item_text"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:id="@+id/widget_date_textview"/>
@@ -83,7 +94,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="wrap_content"
@@ -99,7 +110,7 @@
                 android:gravity="center"
                 android:text="@string/test_text"
                 android:textSize="@dimen/TeamNames"
-                android:textColor="@color/dark_gray"
+                android:textColor="@color/list_item_text"
                 android:id="@+id/widget_away_name"/>
         </LinearLayout>
 
