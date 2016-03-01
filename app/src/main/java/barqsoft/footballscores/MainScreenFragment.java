@@ -1,8 +1,10 @@
 package barqsoft.footballscores;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -12,14 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import barqsoft.footballscores.service.FetchService;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
-{
+public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
     public scoresAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
     private String[] fragmentdate = new String[1];
@@ -27,6 +29,20 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
 
     public MainScreenFragment()
     {
+    }
+
+    @Override
+    public void onResume() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sp.registerOnSharedPreferenceChangeListener(this);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sp.unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
     }
 
     private void update_scores()
@@ -51,11 +67,9 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         score_list.setAdapter(mAdapter);
         getLoaderManager().initLoader(SCORES_LOADER,null,this);
         mAdapter.detail_match_id = MainActivity.selected_match_id;
-        score_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        score_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ViewHolder selected = (ViewHolder) view.getTag();
                 mAdapter.detail_match_id = selected.match_id;
                 MainActivity.selected_match_id = (int) selected.match_id;
@@ -95,6 +109,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         //Log.v(FetchScoreTask.LOG_TAG,"Loader query: " + String.valueOf(i));
         mAdapter.swapCursor(cursor);
         //mAdapter.notifyDataSetChanged();
+        updateEmptyView();
     }
 
     @Override
@@ -103,5 +118,40 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         mAdapter.swapCursor(null);
     }
 
+    /*
+        Updates the empty list view with contextually relevant information that the user can
+        use to determine why they aren't seeing scores.
+     */
+    private void updateEmptyView() {
+        if ( mAdapter.getCount() == 0 ) {
+            TextView tv = (TextView) getView().findViewById(R.id.listview_fixtures_empty);
+            if ( null != tv ) {
+                // if cursor is empty, why? do we have an invalid score
+                int message = R.string.empty_fixtures_list;
+                @FetchService.ScoresStatus int scoreStatus = Utilies.getScoresStatus(getActivity());
+                switch (scoreStatus) {
+                    case FetchService.SCORES_STATUS_SERVER_DOWN:
+                        message = R.string.empty_fixtures_list_server_down;
+                        break;
+                    case FetchService.SCORES_STATUS_SERVER_INVALID:
+                        message = R.string.empty_fixtures_list_server_error;
+                        break;
+                    default:
+                        if (!Utilies.isNetworkAvailable(getActivity()) ) {
+                            message = R.string.empty_fixtures_list_no_network;
+                        }
+                }
+                tv.setText(message);
+            }
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if ( key.equals(getString(R.string.pref_scores_status_key)) ) {
+            updateEmptyView();
+        }
+    }
+}
 
 }

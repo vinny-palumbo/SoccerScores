@@ -1,5 +1,13 @@
 package barqsoft.footballscores;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
+
+import barqsoft.footballscores.service.FetchService;
+
 /**
  * Created by yehya khaled on 3/3/2015.
  */
@@ -101,5 +109,32 @@ public class Utilies {
             case "Stoke City FC" : return R.drawable.stoke_city;
             default: return R.drawable.no_icon;
         }
+    }
+
+    /**
+     * Returns true if the network is available or about to become available.
+     *
+     * @param c Context used to get the ConnectivityManager
+     * @return true if the network is available
+     */
+    static public boolean isNetworkAvailable(Context c) {
+        ConnectivityManager cm =
+                (ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+    }
+
+    /**
+     *
+     * @param c Context used to get the SharedPreferences
+     * @return the scores status integer type
+     */
+    @SuppressWarnings("ResourceType")
+    static public @FetchService.ScoresStatus
+    int getScoresStatus(Context c){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        return sp.getInt(c.getString(R.string.pref_scores_status_key), FetchService.SCORES_STATUS_UNKNOWN);
     }
 }
