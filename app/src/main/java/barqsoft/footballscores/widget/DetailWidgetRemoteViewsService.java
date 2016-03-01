@@ -4,6 +4,7 @@ package barqsoft.footballscores.widget;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.util.Log;
@@ -114,10 +115,10 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 views.setTextViewText(R.id.widget_date_textview, matchTime);
                 views.setTextViewText(R.id.widget_score_textview, formattedScore);
 
-//                final Intent fillInIntent = new Intent();
-//                Uri scoresUri = DatabaseContract.ScoresEntry.buildScoreWithDate();
-//                fillInIntent.setData(scoresUri);
-//                views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
+                final Intent fillInIntent = new Intent();
+                Uri scoresUri = DatabaseContract.ScoresEntry.CONTENT_URI;
+                fillInIntent.setData(scoresUri);
+                views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
 
                 return views;
             }
