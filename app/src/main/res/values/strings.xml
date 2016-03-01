@@ -55,5 +55,8 @@
 
     <!-- Strings related to Widgets -->
     <string name="title_widget_today">Football Scores Today</string>
+
+    <!-- Key name for storing scores status in SharedPreferences -->
+    <string name="pref_scores_status_key" translatable="false">scores-status</string>
     
 </resources>

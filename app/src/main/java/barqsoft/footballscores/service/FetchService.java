@@ -4,7 +4,9 @@ import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.IntDef;
 import android.util.Log;
 
@@ -100,15 +102,16 @@ public class FetchService extends IntentService
             }
             if (buffer.length() == 0) {
                 // Stream was empty.  No point in parsing.
+                setScoresStatus(FetchService.this, SCORES_STATUS_SERVER_DOWN);
                 return;
             }
             JSON_data = buffer.toString();
-        }
-        catch (Exception e)
-        {
-            Log.e(LOG_TAG,"Exception here" + e.getMessage());
-        }
-        finally {
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error ", e);
+            // If the code didn't successfully get the scores data, there's no point in attempting
+            // to parse it.
+            setScoresStatus(FetchService.this, SCORES_STATUS_SERVER_DOWN);
+        }finally {
             if(m_connection != null)
             {
                 m_connection.disconnect();
@@ -251,19 +254,26 @@ public class FetchService extends IntentService
                 values.add(match_values);
             }
             int inserted_data = 0;
-            // delete old data so we don't build up an endless history
-            mContext.getContentResolver().delete(DatabaseContract.ScoresEntry.CONTENT_URI, null, null);
-            ContentValues[] insert_data = new ContentValues[values.size()];
-            values.toArray(insert_data);
-            inserted_data = mContext.getContentResolver().bulkInsert(
-                    DatabaseContract.ScoresEntry.CONTENT_URI,insert_data);
+            // add to database
+            if ( values.size() > 0 ) {
+                // delete old data so we don't build up an endless history
+                mContext.getContentResolver().delete(DatabaseContract.ScoresEntry.CONTENT_URI, null, null);
+                ContentValues[] insert_data = new ContentValues[values.size()];
+                values.toArray(insert_data);
+                inserted_data = mContext.getContentResolver().bulkInsert(
+                        DatabaseContract.ScoresEntry.CONTENT_URI, insert_data);
 
-            //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
-             updateWidgets();
+                updateWidgets();
+            }
+
+            Log.d(LOG_TAG, "Sync Complete. " + values.size() + " Inserted");
+            setScoresStatus(FetchService.this, SCORES_STATUS_OK);
         }
         catch (JSONException e)
         {
             Log.e(LOG_TAG,e.getMessage());
+            e.printStackTrace();
+            setScoresStatus(FetchService.this, SCORES_STATUS_SERVER_INVALID);
         }
 
     }
@@ -274,6 +284,19 @@ public class FetchService extends IntentService
         Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
+    }
+
+    /**
+     * Sets the scores status into shared preference.  This function should not be called from
+     * the UI thread because it uses commit to write to the shared preferences.
+     * @param c Context to get the PreferenceManager from.
+     * @param scoresStatus The IntDef value to set
+     */
+    static private void setScoresStatus(Context c, @ScoresStatus int scoresStatus){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putInt(c.getString(R.string.pref_scores_status_key), scoresStatus);
+        spe.commit();
     }
 }
 
