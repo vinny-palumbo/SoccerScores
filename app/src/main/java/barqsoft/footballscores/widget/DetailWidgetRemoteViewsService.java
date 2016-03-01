@@ -1,16 +1,18 @@
 package barqsoft.footballscores.widget;
 
 
-
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.R;
@@ -28,7 +30,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             DatabaseContract.ScoresEntry.HOME_COL,
             DatabaseContract.ScoresEntry.AWAY_COL,
             DatabaseContract.ScoresEntry.HOME_GOALS_COL,
-            DatabaseContract.ScoresEntry.AWAY_GOALS_COL,
+            DatabaseContract.ScoresEntry.AWAY_GOALS_COL
     };
     // these indices must match the projection
     static final int INDEX_SCORES_ID = 0;
@@ -58,12 +60,15 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 // data. Therefore we need to clear (and finally restore) the calling identity so
                 // that calls use our process and permission
                 final long identityToken = Binder.clearCallingIdentity();
-//                String location = Utility.getPreferredLocation(DetailWidgetRemoteViewsService.this);
-                Uri scoresUri = DatabaseContract.ScoresEntry.CONTENT_URI;
-                data = getContentResolver().query(scoresUri,
+                Date todayDate = new Date(System.currentTimeMillis());
+                SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedTodayDate = mFormat.format(todayDate);
+                Log.d("vinny-debug", "formattedTodayDate: " + formattedTodayDate);
+                data = getContentResolver().query(
+                        DatabaseContract.ScoresEntry.buildScoreWithDate(),
                         SCORES_COLUMNS,
-                        null,
-                        null,
+                        DatabaseContract.ScoresEntry.DATE_COL + " = ?",
+                        new String[]{formattedTodayDate},
                         null);
                 Binder.restoreCallingIdentity(identityToken);
             }

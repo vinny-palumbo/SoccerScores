@@ -237,6 +237,8 @@ public class FetchService extends IntentService
                 values.add(match_values);
             }
             int inserted_data = 0;
+            // delete old data so we don't build up an endless history
+            mContext.getContentResolver().delete(DatabaseContract.ScoresEntry.CONTENT_URI, null, null);
             ContentValues[] insert_data = new ContentValues[values.size()];
             values.toArray(insert_data);
             inserted_data = mContext.getContentResolver().bulkInsert(

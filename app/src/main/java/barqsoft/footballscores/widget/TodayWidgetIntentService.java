@@ -22,9 +22,11 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.widget.RemoteViews;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.MainActivity;
@@ -64,13 +66,16 @@ public class TodayWidgetIntentService extends IntentService {
                 TodayWidgetProvider.class));
 
         // Get today's data from the ContentProvider
-        Uri scoresUri = DatabaseContract.ScoresEntry.CONTENT_URI;
+        Date todayDate = new Date(System.currentTimeMillis());
+        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedTodayDate = mFormat.format(todayDate);
         Cursor data = getContentResolver().query(
-                scoresUri,
+                DatabaseContract.ScoresEntry.buildScoreWithDate(),
                 SCORES_COLUMNS,
-                null,
-                null,
+                DatabaseContract.ScoresEntry.DATE_COL + " = ?",
+                new String[]{formattedTodayDate},
                 null);
+
         if (data == null) {
             return;
         }
