@@ -153,5 +153,3 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         }
     }
 }
-
-}
