@@ -28,54 +28,54 @@ public class Utilies {
     public static final int CL = 405;
     public static final int EL1 = 425;
 
-    public static String getLeague(int league_num)
+    public static String getLeague(int league_num, Context context)
     {
         switch (league_num)
         {
-            case BL1 : return "1. Bundesliga 2015/16";
-            case BL2 : return "2. Bundesliga 2015/16";
-            case FL1 : return "Ligue 1 2015/16";
-            case FL2 : return "Ligue 2 2015/16";
-            case PL : return "Premier League 2015/16";
-            case PD : return "Primera Division 2015/16";
-            case SD : return "Segunda Division 2015/16";
-            case SA : return "Serie A 2015/16";
-            case PPL : return "Primeira Liga 2015/16";
-            case BL3 : return "3. Bundesliga 2015/16";
-            case DED : return "Eredivisie 2015/16";
-            case CL : return "Champions League 2015/16";
-            case EL1 : return "League One 2015/16";
-            default: return "Not known League. Please Report.";
+            case BL1 : return context.getString(R.string.league_Bundesliga1);
+            case BL2 : return context.getString(R.string.league_Bundesliga2);
+            case FL1 : return context.getString(R.string.league_Ligue1);
+            case FL2 : return context.getString(R.string.league_Ligue2);
+            case PL : return context.getString(R.string.league_PremierLeague);
+            case PD : return context.getString(R.string.league_PrimeraDivision);
+            case SD : return context.getString(R.string.league_SegundaDivision);
+            case SA : return context.getString(R.string.league_SerieA);
+            case PPL : return context.getString(R.string.league_PrimeiraLiga);
+            case BL3 : return context.getString(R.string.league_Bundesliga3);
+            case DED : return context.getString(R.string.league_Eredivisie);
+            case CL : return context.getString(R.string.league_ChampionsLeague);
+            case EL1 : return context.getString(R.string.league_LeagueOne);
+            default: return context.getString(R.string.league_NotKnown);
         }
     }
-    public static String getMatchDay(int match_day,int league_num)
+    public static String getMatchDay(Context context, int match_day,int league_num)
     {
         if(league_num == CL)
         {
             if (match_day <= 6)
             {
-                return "Group Stages, Matchday : 6";
+                return context.getString(R.string.matchday_groupStages);
             }
             else if(match_day == 7 || match_day == 8)
             {
-                return "First Knockout round";
+                return context.getString(R.string.matchday_knockout);
             }
             else if(match_day == 9 || match_day == 10)
             {
-                return "QuarterFinal";
+                return context.getString(R.string.matchday_quarterfinal);
             }
             else if(match_day == 11 || match_day == 12)
             {
-                return "SemiFinal";
+                return context.getString(R.string.matchday_semifinal);
             }
             else
             {
-                return "Final";
+                return context.getString(R.string.matchday_final);
             }
         }
         else
         {
-            return "Matchday : " + String.valueOf(match_day);
+            return context.getString(R.string.matchday_other) + String.valueOf(match_day);
         }
     }
 
@@ -91,24 +91,21 @@ public class Utilies {
         }
     }
 
-    public static int getTeamCrestByTeamName (String teamname)
-    {
+    public static int getTeamCrestByTeamName (Context context, String teamname){
         if (teamname==null){return R.drawable.no_icon;}
-        switch (teamname)
-        { //This is the set of icons that are currently in the app. Feel free to find and add more
-            //as you go.
-            case "Arsenal London FC" : return R.drawable.arsenal;
-            case "Manchester United FC" : return R.drawable.manchester_united;
-            case "Swansea City" : return R.drawable.swansea_city_afc;
-            case "Leicester City" : return R.drawable.leicester_city_fc_hd_logo;
-            case "Everton FC" : return R.drawable.everton_fc_logo1;
-            case "West Ham United FC" : return R.drawable.west_ham;
-            case "Tottenham Hotspur FC" : return R.drawable.tottenham_hotspur;
-            case "West Bromwich Albion" : return R.drawable.west_bromwich_albion_hd_logo;
-            case "Sunderland AFC" : return R.drawable.sunderland;
-            case "Stoke City FC" : return R.drawable.stoke_city;
-            default: return R.drawable.no_icon;
-        }
+        //This is the set of icons that are currently in the app. Feel free to find and add more
+        //as you go.
+        if(teamname.equals(context.getString(R.string.teamName_Arsenal))){ return R.drawable.arsenal;}
+        else if(teamname.equals(context.getString(R.string.teamName_Manchester))){ return R.drawable.manchester_united;}
+        else if(teamname.equals(context.getString(R.string.teamName_Swansea))){ return R.drawable.swansea_city_afc;}
+        else if(teamname.equals(context.getString(R.string.teamName_Leicester))){ return R.drawable.leicester_city_fc_hd_logo;}
+        else if(teamname.equals(context.getString(R.string.teamName_Everton))){ return R.drawable.everton_fc_logo1;}
+        else if(teamname.equals(context.getString(R.string.teamName_WestHam))){ return R.drawable.west_ham;}
+        else if(teamname.equals(context.getString(R.string.teamName_Tottenham))){ return R.drawable.tottenham_hotspur;}
+        else if(teamname.equals(context.getString(R.string.teamName_WestBromwich))){ return R.drawable.west_bromwich_albion_hd_logo;}
+        else if(teamname.equals(context.getString(R.string.teamName_Sunderland))){ return R.drawable.sunderland;}
+        else if(teamname.equals(context.getString(R.string.teamName_Stoke))){ return R.drawable.stoke_city;}
+        else{ return R.drawable.no_icon;}
     }
 
     /**

@@ -97,9 +97,9 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                         R.layout.widget_detail_list_item);
 
                 String homeTeam = data.getString(INDEX_SCORES_HOME_TEAM);
-                int homeIconResourceId = Utilies.getTeamCrestByTeamName(homeTeam);
+                int homeIconResourceId = Utilies.getTeamCrestByTeamName(DetailWidgetRemoteViewsService.this, homeTeam);
                 String awayTeam = data.getString(INDEX_SCORES_AWAY_TEAM);
-                int awayIconResourceId = Utilies.getTeamCrestByTeamName(awayTeam);
+                int awayIconResourceId = Utilies.getTeamCrestByTeamName(DetailWidgetRemoteViewsService.this, awayTeam);
                 String matchTime = data.getString(INDEX_SCORES_TIME);
                 int scoreHome = data.getInt(INDEX_SCORES_HOME_GOALS);
                 int scoreAway = data.getInt(INDEX_SCORES_AWAY_GOALS);

@@ -86,9 +86,9 @@ public class TodayWidgetIntentService extends IntentService {
 
         // Extract the weather data from the Cursor
         String homeTeam = data.getString(INDEX_SCORES_HOME_TEAM);
-        int homeIconResourceId = Utilies.getTeamCrestByTeamName(homeTeam);
+        int homeIconResourceId = Utilies.getTeamCrestByTeamName(TodayWidgetIntentService.this ,homeTeam);
         String awayTeam = data.getString(INDEX_SCORES_AWAY_TEAM);
-        int awayIconResourceId = Utilies.getTeamCrestByTeamName(awayTeam);
+        int awayIconResourceId = Utilies.getTeamCrestByTeamName(TodayWidgetIntentService.this, awayTeam);
         String matchTime = data.getString(INDEX_SCORES_TIME);
         int scoreHome = data.getInt(INDEX_SCORES_HOME_GOALS);
         int scoreAway = data.getInt(INDEX_SCORES_AWAY_GOALS);

@@ -61,5 +61,44 @@
 
     <!-- Key name for storing scores status in SharedPreferences -->
     <string name="pref_scores_status_key" translatable="false">scores-status</string>
+
+    <string name="share_hashtag" translatable="false">#FootballScores</string>
+
+    <!--League names-->
+    <string name="league_Bundesliga1" translatable="false">1. Bundesliga 2015/16</string>
+    <string name="league_Bundesliga2" translatable="false">2. Bundesliga 2015/16</string>
+    <string name="league_Ligue1" translatable="false">Ligue 1 2015/16</string>
+    <string name="league_Ligue2" translatable="false">Ligue 2 2015/16</string>
+    <string name="league_PremierLeague" translatable="false">Premier League 2015/16</string>
+    <string name="league_PrimeraDivision" translatable="false">Primera Division 2015/16</string>
+    <string name="league_SegundaDivision" translatable="false">Segunda Division 2015/16</string>
+    <string name="league_SerieA">Serie A 2015/16</string>
+    <string name="league_PrimeiraLiga" translatable="false">Primeira Liga 2015/16</string>
+    <string name="league_Bundesliga3" translatable="false">3. Bundesliga 2015/16</string>
+    <string name="league_Eredivisie" translatable="false">Eredivisie 2015/16</string>
+    <string name="league_ChampionsLeague">Champions League 2015/16</string>
+    <string name="league_LeagueOne" translatable="false">League One 2015/16</string>
+    <string name="league_NotKnown">Not known League. Please Report.</string>
+
+
+    <!--Match Day Champion League-->
+    <string name="matchday_groupStages">Group Stages, Matchday : 6</string>
+    <string name="matchday_knockout">First Knockout round</string>
+    <string name="matchday_quarterfinal">QuarterFinal</string>
+    <string name="matchday_semifinal">SemiFinal</string>
+    <string name="matchday_final">Final</string>
+    <string name="matchday_other">Matchday : </string>
+
+    <!--Team names-->
+    <string name="teamName_Arsenal">Arsenal London FC</string>
+    <string name="teamName_Manchester">Manchester United FC</string>
+    <string name="teamName_Swansea">Swansea City</string>
+    <string name="teamName_Leicester">Leicester City</string>
+    <string name="teamName_Everton">Everton FC</string>
+    <string name="teamName_WestHam">West Ham United FC</string>
+    <string name="teamName_Tottenham">Tottenham Hotspur FC</string>
+    <string name="teamName_WestBromwich">West Bromwich Albion</string>
+    <string name="teamName_Sunderland">Sunderland AFC</string>
+    <string name="teamName_Stoke">Stoke City FC</string>
     
 </resources>
