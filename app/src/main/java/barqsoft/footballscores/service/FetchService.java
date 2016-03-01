@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.IntDef;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -15,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -32,6 +35,17 @@ public class FetchService extends IntentService
 {
     public static final String LOG_TAG = "FetchService";
     public static final String ACTION_DATA_UPDATED = "barqsoft.footballscores.ACTION_DATA_UPDATED";
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({SCORES_STATUS_OK, SCORES_STATUS_SERVER_DOWN, SCORES_STATUS_SERVER_INVALID, SCORES_STATUS_UNKNOWN})
+    public @interface ScoresStatus {}
+
+    public static final int SCORES_STATUS_OK = 0;
+    public static final int SCORES_STATUS_SERVER_DOWN = 1;
+    public static final int
+            SCORES_STATUS_SERVER_INVALID = 2;
+    public static final int
+            SCORES_STATUS_UNKNOWN = 3;
 
     public FetchService()
     {
